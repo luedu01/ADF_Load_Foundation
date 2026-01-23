@@ -24,13 +24,13 @@ public class UserService {
 
     public List<UserDto> getUsers() {
         String schema = databaseConfig.getSchema();
-        String sql = "SELECT User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_Dttm, Updated_Dttm FROM " + schema + ".\"USER\"";
+        String sql = "SELECT User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_By, Created_Dttm, Updated_By, Updated_Dttm FROM " + schema + ".\"USER\"";
         return jdbcTemplate.query(sql, userRowMapper());
     }
 
     public UserDto getUserById(Integer userId) {
         String schema = databaseConfig.getSchema();
-        String sql = "SELECT User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_Dttm, Updated_Dttm FROM " + schema + ".\"USER\" WHERE User_Id = ?";
+        String sql = "SELECT User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_By, Created_Dttm, Updated_By, Updated_Dttm FROM " + schema + ".\"USER\" WHERE User_Id = ?";
         try {
             return jdbcTemplate.queryForObject(sql, userRowMapper(), userId);
         } catch (EmptyResultDataAccessException e) {
@@ -40,25 +40,28 @@ public class UserService {
 
     public void createUser(UserDto user) {
         String schema = databaseConfig.getSchema();
-        String sql = "INSERT INTO " + schema + ".\"USER\" (User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_Dttm, Updated_Dttm) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+        String sql = "INSERT INTO " + schema + ".\"USER\" (User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_By, Created_Dttm, Updated_By, Updated_Dttm) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP)";
         jdbcTemplate.update(sql,
                 user.getUserId(),
                 user.getUserName(),
                 user.getEmailDesc(),
                 user.getFullName(),
                 user.getIsActive(),
-                user.getLastLoginDttm());
+                user.getLastLoginDttm(),
+                user.getCreatedBy(),
+                user.getUpdatedBy());
     }
 
     public void updateUser(Integer userId, UserDto user) {
         String schema = databaseConfig.getSchema();
-        String sql = "UPDATE " + schema + ".\"USER\" SET User_Name = ?, Email_Desc = ?, Full_Name = ?, Is_Active = ?, Last_Login_Dttm = ?, Updated_Dttm = CURRENT_TIMESTAMP WHERE User_Id = ?";
+        String sql = "UPDATE " + schema + ".\"USER\" SET User_Name = ?, Email_Desc = ?, Full_Name = ?, Is_Active = ?, Last_Login_Dttm = ?, Updated_By = ?, Updated_Dttm = CURRENT_TIMESTAMP WHERE User_Id = ?";
         jdbcTemplate.update(sql,
                 user.getUserName(),
                 user.getEmailDesc(),
                 user.getFullName(),
                 user.getIsActive(),
                 user.getLastLoginDttm(),
+                user.getUpdatedBy(),
                 userId);
     }
 
@@ -81,8 +84,14 @@ public class UserService {
                 if (rs.getTimestamp("Last_Login_Dttm") != null) {
                     user.setLastLoginDttm(rs.getTimestamp("Last_Login_Dttm").toLocalDateTime());
                 }
+                if (rs.getObject("Created_By") != null) {
+                    user.setCreatedBy(rs.getInt("Created_By"));
+                }
                 if (rs.getTimestamp("Created_Dttm") != null) {
                     user.setCreatedDttm(rs.getTimestamp("Created_Dttm").toLocalDateTime());
+                }
+                if (rs.getObject("Updated_By") != null) {
+                    user.setUpdatedBy(rs.getInt("Updated_By"));
                 }
                 if (rs.getTimestamp("Updated_Dttm") != null) {
                     user.setUpdatedDttm(rs.getTimestamp("Updated_Dttm").toLocalDateTime());
@@ -92,4 +101,3 @@ public class UserService {
         };
     }
 }
-

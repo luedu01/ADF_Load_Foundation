@@ -10,7 +10,9 @@ public class UserDto {
     private String fullName;
     private String isActive;
     private LocalDateTime lastLoginDttm;
+    private Integer createdBy;
     private LocalDateTime createdDttm;
+    private Integer updatedBy;
     private LocalDateTime updatedDttm;
 
     public Integer getUserId() {
@@ -69,6 +71,14 @@ public class UserDto {
         this.createdDttm = createdDttm;
     }
 
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
     public LocalDateTime getUpdatedDttm() {
         return updatedDttm;
     }
@@ -76,5 +86,12 @@ public class UserDto {
     public void setUpdatedDttm(LocalDateTime updatedDttm) {
         this.updatedDttm = updatedDttm;
     }
-}
 
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+}
