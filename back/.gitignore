@@ -1,0 +1,200 @@
+### Java ###
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+
+### VS Code ###
+.vscode/
+.code-workspace
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Spring Boot ###
+spring-boot-devtools.properties
+
+### Logs ###
+logs/
+*.log
+log/
+
+### OS ###
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.directory
+.Trash-*
+.nfs*
+
+### Sensitive Information ###
+# Archivos de configuración con datos sensibles
+application-local.properties
+application-local.yml
+application-dev.properties
+application-prod.properties
+*.env
+.env.local
+.env.*.local
+
+# Credenciales y secrets
+secrets/
+credentials/
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+
+### Build Tools ###
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Gradle (por si se usa en el futuro) ###
+.gradle
+**/build/
+!src/**/build/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+.gradletasknamecache
+
+### Database ###
+*.db
+*.sqlite
+*.sqlite3
+*.h2.db
+
+### Coverage reports ###
+*.lcov
+coverage/
+*.coverage
+.nyc_output
+
+### Testing ###
+test-output/
+.pytest_cache/
+
+### Temporary files ###
+*.tmp
+*.temp
+temp/
+tmp/
+
+### MapStruct generated files (ya están en target pero por si acaso) ###
+generated/
+**/generated/
+
+### Node (si se usa frontend en el futuro) ###
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+### Backup files ###
+*.bak
+*.backup
+*.old
+*~
+
+### Compiled output ###
+*.com
+*.dll
+*.exe
+*.o
+*.so
+
+### Package Files ###
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+### Documentation ###
+docs/generated/
+site/
