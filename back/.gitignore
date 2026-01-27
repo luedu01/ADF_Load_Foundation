@@ -30,7 +30,6 @@ buildNumber.properties
 *.iws
 *.iml
 *.ipr
-out/
 .idea_modules/
 
 ### Eclipse ###
