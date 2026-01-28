@@ -7,7 +7,7 @@ CREATE MULTISET  TABLE LOAD_FND.CONNECTION
 	Connection_Subtype_Id INTEGER NULL ,
 	Connection_Type_Id   INTEGER NULL ,
 	Server_Name          VARCHAR(100) NULL ,
-	Additional_Info_Desc VARCHAR(200) NULL ,
+	Additional_Info_Json JSON(32000) NULL ,
 	Created_By           INTEGER NULL ,
 	Created_Dttm         TIMESTAMP(6) NULL ,
 	Updated_By           INTEGER NULL ,
