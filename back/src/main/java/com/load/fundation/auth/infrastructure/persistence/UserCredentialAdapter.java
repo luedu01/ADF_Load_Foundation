@@ -2,7 +2,7 @@ package com.load.fundation.auth.infrastructure.persistence;
 
 import com.load.fundation.auth.domain.port.out.UserCredentialPort;
 import com.load.fundation.shared.config.DatabaseConfig;
-import com.load.fundation.shared.util.constants.SqlQueries;
+import com.load.fundation.user.infrastructure.persistence.util.query.SqlQueryUser;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,7 +23,7 @@ public class UserCredentialAdapter implements UserCredentialPort {
     @Override
     public Map<String, Object> findUserCredentialsByUsername(String username) {
         String schema = databaseConfig.getSchema();
-        String sql = String.format(SqlQueries.SELECT_USER_CREDENTIALS, schema, schema);
+        String sql = String.format(SqlQueryUser.SELECT_USER_CREDENTIALS, schema, schema);
 
         try {
             return jdbcTemplate.queryForMap(sql, username);

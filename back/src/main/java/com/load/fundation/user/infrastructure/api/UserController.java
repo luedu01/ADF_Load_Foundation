@@ -59,6 +59,8 @@ public class UserController {
     })
     @PostMapping
     public ResponseEntity<Void> createUser(@RequestBody UserDto user) {
+        // POST: only createdBy
+        user.setUpdatedBy(null);
         userUseCase.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -69,6 +71,8 @@ public class UserController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateUser(@PathVariable("id") Integer id, @RequestBody UserDto user) {
+        // PUT: only updatedBy
+        user.setCreatedBy(null);
         userUseCase.updateUser(id, user);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

@@ -8,6 +8,9 @@ import com.load.fundation.user.domain.port.out.UserPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -32,13 +35,20 @@ public class UserService implements UserUseCase {
 
     @Override
     public void createUser(UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
+        User user = userMapper.toDomain(userDto);
+        user.setUpdatedBy(null);
+        LocalDateTime now = LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+        user.setCreatedDttm(now);
+        user.setUpdatedDttm(null);
         userPersistencePort.save(user);
     }
 
     @Override
     public void updateUser(Integer userId, UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
+        User user = userMapper.toDomain(userDto);
+        user.setCreatedBy(null);
+        LocalDateTime now = LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+        user.setUpdatedDttm(now);
         userPersistencePort.update(userId, user);
     }
 

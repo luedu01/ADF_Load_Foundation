@@ -23,5 +23,5 @@ public interface UserMapper {
      * @param userDto DTO
      * @return Entidad de dominio
      */
-    User toEntity(UserDto userDto);
+    User toDomain(UserDto userDto);
 }

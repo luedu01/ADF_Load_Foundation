@@ -2,7 +2,7 @@ package com.load.fundation.user.infrastructure.persistence;
 
 import com.load.fundation.shared.config.DatabaseConfig;
 import com.load.fundation.shared.util.constants.DatabaseColumns;
-import com.load.fundation.shared.util.constants.SqlQueries;
+import com.load.fundation.user.infrastructure.persistence.util.query.SqlQueryUser;
 import com.load.fundation.user.domain.model.User;
 import com.load.fundation.user.domain.port.out.UserPersistencePort;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,13 +27,13 @@ public class UserRepository implements UserPersistencePort {
 
     public List<User> findAll() {
         String schema = databaseConfig.getSchema();
-        String sql = "SELECT User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_By, Created_Dttm, Updated_By, Updated_Dttm FROM " + schema + ".\"USER\"";
+        String sql = String.format(SqlQueryUser.SELECT_ALL_USERS, schema);
         return jdbcTemplate.query(sql, userRowMapper());
     }
 
     public User findById(Integer userId) {
         String schema = databaseConfig.getSchema();
-        String sql = "SELECT User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_By, Created_Dttm, Updated_By, Updated_Dttm FROM " + schema + ".\"USER\" WHERE User_Id = ?";
+        String sql = String.format(SqlQueryUser.SELECT_USER_BY_ID, schema);
         try {
             return jdbcTemplate.queryForObject(sql, userRowMapper(), userId);
         } catch (EmptyResultDataAccessException e) {
@@ -43,7 +43,7 @@ public class UserRepository implements UserPersistencePort {
 
     public void save(User user) {
         String schema = databaseConfig.getSchema();
-        String sql = "INSERT INTO " + schema + ".\"USER\" (User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_By, Created_Dttm, Updated_By, Updated_Dttm) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP)";
+        String sql = String.format(SqlQueryUser.INSERT_USER, schema);
         jdbcTemplate.update(sql,
                 user.getUserId(),
                 user.getUserName(),
@@ -52,12 +52,14 @@ public class UserRepository implements UserPersistencePort {
                 user.getIsActive(),
                 user.getLastLoginDttm(),
                 user.getCreatedBy(),
-                user.getUpdatedBy());
+                user.getCreatedDttm(),
+                user.getUpdatedBy(),
+                user.getUpdatedDttm());
     }
 
     public void update(Integer userId, User user) {
         String schema = databaseConfig.getSchema();
-        String sql = "UPDATE " + schema + ".\"USER\" SET User_Name = ?, Email_Desc = ?, Full_Name = ?, Is_Active = ?, Last_Login_Dttm = ?, Updated_By = ?, Updated_Dttm = CURRENT_TIMESTAMP WHERE User_Id = ?";
+        String sql = String.format(SqlQueryUser.UPDATE_USER, schema);
         jdbcTemplate.update(sql,
                 user.getUserName(),
                 user.getEmailDesc(),
@@ -65,13 +67,14 @@ public class UserRepository implements UserPersistencePort {
                 user.getIsActive(),
                 user.getLastLoginDttm(),
                 user.getUpdatedBy(),
+                user.getUpdatedDttm(),
                 userId);
     }
 
     @Override
     public void deleteById(Integer userId) {
         String schema = databaseConfig.getSchema();
-        String sql = "DELETE FROM " + schema + ".\"USER\" WHERE User_Id = ?";
+        String sql = String.format(SqlQueryUser.DELETE_USER, schema);
         jdbcTemplate.update(sql, userId);
     }
 
