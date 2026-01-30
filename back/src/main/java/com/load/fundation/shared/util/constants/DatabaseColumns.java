@@ -24,9 +24,24 @@ public final class DatabaseColumns {
     // Columnas de tabla USER_CREDENTIAL
     public static final String PASSWORD_HASH = "Password_Hash";
 
+    //columnas de tabla CONNECTIONS
+    public static final String CONNECTION_ID = "Connection_Id";
+    public static final String CONNECTION_NAME = "Connection_Name";
+    public static final String CONNECTION_DESCRIPTION = "Connection_Description";
+    public static final String CONNECTION_TYPE_ID = "Connection_Type_Id";
+    public static final String CONNECTION_SUBTYPE_ID = "Connection_Subtype_Id";
+    public static final String SERVER_NAME = "Server_Name";
+    public static final String ADDITIONAL_INFO = "Additional_Info";
+
+    // Columnas de tabla CONNECTION_GROUP
+    public static final String GROUP_ID = "Group_Id";
+
+
     // Nombres de tablas
     public static final String TABLE_USER = "\"USER\"";
     public static final String TABLE_USER_CREDENTIAL = "USER_CREDENTIAL";
+    public static final String TABLE_CONNECTION = "CONNECTION";
+    public static final String TABLE_CONNECTION_GROUP = "CONNECTION_GROUP";
 
     // Funciones SQL
     public static final String SQL_CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";

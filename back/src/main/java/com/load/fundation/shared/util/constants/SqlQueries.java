@@ -18,7 +18,7 @@ public final class SqlQueries {
 
     public static final String INSERT_USER =
             "INSERT INTO %s.\"USER\" (User_Id, User_Name, Email_Desc, Full_Name, Is_Active, Last_Login_Dttm, Created_By, Created_Dttm, Updated_By, Updated_Dttm) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP)";
 
     public static final String UPDATE_USER =
             "UPDATE %s.\"USER\" SET User_Name = ?, Email_Desc = ?, Full_Name = ?, Is_Active = ?, Last_Login_Dttm = ?, Updated_By = ?, Updated_Dttm = CURRENT_TIMESTAMP WHERE User_Id = ?";
@@ -29,7 +29,8 @@ public final class SqlQueries {
     // Authentication queries
     public static final String SELECT_USER_CREDENTIALS =
             "SELECT u.User_Id, u.User_Name, u.Is_Active, c.Password_Hash " +
-            "FROM %s.\"USER\" u " +
-            "JOIN %s.USER_CREDENTIAL c ON u.User_Id = c.User_Id " +
-            "WHERE u.User_Name = ?";
+                    "FROM %s.\"USER\" u " +
+                    "JOIN %s.USER_CREDENTIAL c ON u.User_Id = c.User_Id " +
+                    "WHERE u.User_Name = ?";
+
 }
